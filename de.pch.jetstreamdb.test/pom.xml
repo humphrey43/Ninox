@@ -1,0 +1,40 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>de.pch.jetstreamdb</groupId>
+  <artifactId>de.pch.jetstreamdb.test</artifactId>
+  <version>1.0</version>
+  <name>JetstreamDB Test</name>
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.1</version>
+					<configuration>
+						<source>1.8</source>
+						<target>1.8</target>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+<dependencies>
+<dependency>
+	<groupId>com.jetstreamdb</groupId>
+	<artifactId>jetstreamdb-embedded</artifactId>
+	<version>1.0.0-beta1</version>
+</dependency>
+	<dependency>
+		<groupId>de.pch.jetstreamdb</groupId>
+		<artifactId>de.pch.jetstreamdb</artifactId>
+		<version>1.0</version>
+	</dependency>
+	<dependency>
+		<groupId>de.pch.dataobject</groupId>
+		<artifactId>de.pch.dataobject.basic</artifactId>
+		<version>1.0</version>
+	</dependency>
+</dependencies>
+	<description>classes for the test of simple jetstream databases</description>
+</project>
