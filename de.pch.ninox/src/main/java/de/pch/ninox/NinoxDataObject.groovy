@@ -15,6 +15,17 @@ class NinoxDataObject extends DataObject {
 	@Override
 	public void saveDB(JetstreamDBInstance<JetstreamRoot> instance) {
     	instance.store(fields)
-    	instance.store(this)
+		super.saveDB(instance)
+	}
+	
+	@Override
+	public String getObjectName() {
+		return this.class.simpleName
+	}
+	
+	@Override
+	public String getObjectKey() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

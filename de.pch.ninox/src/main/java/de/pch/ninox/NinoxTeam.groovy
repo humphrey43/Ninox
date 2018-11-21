@@ -12,7 +12,7 @@ class NinoxTeam extends NinoxCatalogObject {
 	}
 	
 	@Override
-	protected void saveDB(JetstreamDBInstance<JetstreamRoot> instance) {
+	public void saveDB(JetstreamDBInstance<JetstreamRoot> instance) {
     	instance.store(databases)
     	super.saveDB(instance);
 	}

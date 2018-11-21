@@ -16,7 +16,6 @@ abstract class DataObject implements JetstreamObject, RepositoryObject {
 
 	@Override
 	public void saveDB(JetstreamDBInstance<JetstreamRoot> instance) {
-		// TODO Auto-generated method stub
-		
+		instance.store(this)
 	}
 }

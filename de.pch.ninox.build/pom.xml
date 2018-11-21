@@ -1,0 +1,16 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>de.pch.ninox</groupId>
+  <artifactId>de.pch.ninox.build</artifactId>
+  <version>0.0</version>
+  <packaging>pom</packaging>
+  <name>Ninox Build</name>
+  <description>build all Ninox classe</description>
+  <modules>
+  	<module>../de.pch.dataobject.basic</module>
+  	<module>../de.pch.jetstreamdb</module>
+  	<module>../de.pch.ninox</module>
+  	<module>../de.pch.repository</module>
+  	<module>../de.pch.rest</module>
+  </modules>
+</project>

@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>de.pch.jetstreamdb</groupId>
   <artifactId>de.pch.jetstreamdb.test</artifactId>
-  <version>1.0</version>
+  <version>1.0.0</version>
   <name>JetstreamDB Test</name>
 	<build>
 		<pluginManagement>
@@ -20,20 +20,15 @@
 		</pluginManagement>
 	</build>
 <dependencies>
-<dependency>
-	<groupId>com.jetstreamdb</groupId>
-	<artifactId>jetstreamdb-embedded</artifactId>
-	<version>1.0.0-beta1</version>
-</dependency>
 	<dependency>
 		<groupId>de.pch.jetstreamdb</groupId>
 		<artifactId>de.pch.jetstreamdb</artifactId>
-		<version>1.0</version>
+		<version>1.0.0</version>
 	</dependency>
 	<dependency>
 		<groupId>de.pch.dataobject</groupId>
 		<artifactId>de.pch.dataobject.basic</artifactId>
-		<version>1.0</version>
+		<version>1.0.0</version>
 	</dependency>
 </dependencies>
 	<description>classes for the test of simple jetstream databases</description>

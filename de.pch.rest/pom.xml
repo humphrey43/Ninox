@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>de.pch.rest</groupId>
   <artifactId>de.pch.rest</artifactId>
-  <version>1.0</version>
+  <version>1.0.0</version>
   <name>REST</name>
 	<build>
 		<pluginManagement>
@@ -12,8 +12,8 @@
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>3.1</version>
 					<configuration>
-						<source>1.8</source>
-						<target>1.8</target>
+						<source>1.7</source>
+						<target>1.7</target>
 					</configuration>
 				</plugin>
 			</plugins>
@@ -24,11 +24,6 @@
 		<groupId>org.codehaus.groovy.modules.http-builder</groupId>
 		<artifactId>http-builder</artifactId>
 		<version>0.7.1</version>
-	</dependency>
-	<dependency>
-		<groupId>de.pch.rest</groupId>
-		<artifactId>de.pch.rest</artifactId>
-		<version>1.0</version>
 	</dependency>
 </dependencies>
 	<description>basic implementation of REST interface</description>

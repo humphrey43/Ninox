@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>de.pch.dataobject</groupId>
   <artifactId>de.pch.dataobject.basic</artifactId>
-  <version>1.0</version>
+  <version>1.0.0</version>
   <name>Dataobjects</name>
 	<build>
 		<pluginManagement>
@@ -24,12 +24,12 @@
 		<dependency>
 			<groupId>de.pch.repository</groupId>
 			<artifactId>de.pch.repository</artifactId>
-			<version>1.0</version>
+			<version>1.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>de.pch.jetstreamdb</groupId>
 			<artifactId>de.pch.jetstreamdb</artifactId>
-			<version>1.0</version>
+			<version>1.0.0</version>
 		</dependency>
 	</dependencies>
 </project>

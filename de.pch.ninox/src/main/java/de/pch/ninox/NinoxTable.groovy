@@ -13,7 +13,7 @@ class NinoxTable extends NinoxCatalogObject {
 	}
 	
 	@Override
-	protected void saveDB(JetstreamDBInstance<JetstreamRoot> instance) {
+	public void saveDB(JetstreamDBInstance<JetstreamRoot> instance) {
     	instance.store(fields)
     	super.saveDB(instance);
 	}

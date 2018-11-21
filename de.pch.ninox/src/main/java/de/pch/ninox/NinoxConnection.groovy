@@ -1,6 +1,7 @@
 package de.pch.ninox
 
 import de.pch.jetstreamdb.JetstreamDatabase
+import de.pch.rest.SslRest
 import de.pch.jetstreamdb.JetstreamDBHandler
 import net.sf.json.JSON
 import net.sf.json.groovy.JsonSlurper
@@ -15,13 +16,20 @@ class NinoxConnection {
 	String apiKey = ''
 	String ninoxUrl = ''
 	SslRest sslRest = null
+
+	Properties properties = null;
+
+	NinoxConnection() {
+		apiKey = readProperty("APIKEY")
+		ninoxUrl = 'https://api.ninoxdb.de/v1/'
+	}
 	
 	JetstreamDatabase useDatabase(String dbName) {
 		return JetstreamDBHandler.useDatabase(dbName);
 	}
 	
 	JetstreamDatabase useDatabase(String dbName, boolean clear) {
-		return JetstreamDBHandler.useDatabase(dbName, clear);
+		return JetstreamDBHandler.useDatabase(dbName, clear)
 	}
 	
 //	readDatabase
@@ -143,6 +151,13 @@ class NinoxConnection {
 		return jsonData
 	}
 	
+	String readProperty(String key) {
+		if (properties == null) {
+			properties = new Properties();
+			properties.load(new FileInputStream(System.getProperty("user.home") + '/NinoxConnection.properties'))
+		}
+		return properties[key]
+	}
 	void assertSslRest() {
 		if (sslRest == null) {
 			sslRest = new SslRest()

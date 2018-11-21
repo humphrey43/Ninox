@@ -1,9 +1,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>de.pch.testrest</groupId>
-  <artifactId>de.pch.testrest</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>TestREST</name>
+  <groupId>de.pch.ninox</groupId>
+  <artifactId>de.pch.ninox</artifactId>
+  <version>1.0.0</version>
+  <name>Ninox</name>
 	<build>
 		<pluginManagement>
 			<plugins>
@@ -21,14 +21,15 @@
 	</build>
 <dependencies>
 	<dependency>
-		<groupId>org.codehaus.groovy.modules.http-builder</groupId>
-		<artifactId>http-builder</artifactId>
-		<version>0.7.1</version>
-	</dependency>
-	<dependency>
 		<groupId>de.pch.dataobject</groupId>
 		<artifactId>de.pch.dataobject.basic</artifactId>
-		<version>1.0</version>
+		<version>1.0.0</version>
+	</dependency>
+	<dependency>
+		<groupId>de.pch.rest</groupId>
+		<artifactId>de.pch.rest</artifactId>
+		<version>1.0.0</version>
 	</dependency>
 </dependencies>
+	<description>Class for the read of data from Ninox databaseses </description>
 </project>
