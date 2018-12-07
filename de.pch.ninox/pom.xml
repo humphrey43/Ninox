@@ -30,6 +30,11 @@
 		<artifactId>de.pch.rest</artifactId>
 		<version>1.0.0</version>
 	</dependency>
+	<dependency>
+		<groupId>de.pch.jetstreamdb</groupId>
+		<artifactId>de.pch.jetstreamdb</artifactId>
+		<version>1.0.0</version>
+	</dependency>
 </dependencies>
 	<description>Class for the read of data from Ninox databaseses </description>
 </project>

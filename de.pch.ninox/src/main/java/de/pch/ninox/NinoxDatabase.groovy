@@ -1,6 +1,7 @@
 package de.pch.ninox
 
 import com.jetstreamdb.JetstreamDBInstance
+import de.pch.jetstreamdb.JetstreamDatabase
 import de.pch.jetstreamdb.JetstreamRoot
 
 class NinoxDatabase extends NinoxCatalogObject {
@@ -8,16 +9,15 @@ class NinoxDatabase extends NinoxCatalogObject {
 	Map<String, NinoxTable> tables = [:]
 	Map<String, NinoxTable> tablesId = [:]
 	
-	NinoxDatabase(JetstreamDBInstance<JetstreamRoot> instance, NinoxTeam team, String databaseName) {
-		super()
+	NinoxDatabase(JetstreamDatabase jetstreamDatabase, NinoxTeam team, String _name, String _id) {
+		super(jetstreamDatabase, _name, _id)
 		this.team = team
-		team.databases[databaseName] = this
-		instance.setObject(databaseName, this)
-		instance.setDatabaseChanged()
+		team.databases[_name] = this
+		team.save(jetstreamDatabase)
 	}
 	
 	String collectPath() {
-		return team.collectPath() + '/databases/' + id
+		return team.collectPath() + '/databases/' + _id
 	}
 	
 	@Override

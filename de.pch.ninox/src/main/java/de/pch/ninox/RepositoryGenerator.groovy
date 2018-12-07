@@ -1,16 +1,16 @@
 package de.pch.ninox
 
-import net.sf.json.JSON
-import net.sf.json.groovy.JsonSlurper
+import de.pch.jetstreamdb.JetstreamDatabase
+import de.pch.jetstreamdb.JetstreamDBHandler
 
 class RepositoryGenerator {
-	
-	void generateDatabaseModel(String databaseName, String projectPath, String packageName) {
-		NinoxDatabase database = localMetaDB.databases[databaseName]
+
+	void generateDatabaseModel(JetstreamDatabase jetstreamDatabase, String teamName, String databaseName, String projectPath, String packageName) {
+		NinoxDatabase database = jetstreamDatabase.getObject(NinoxConnection.NINOX_DATABASE, databaseName)
 		if (database != null) {
-			database.tables.each {String tableName, NinoxTable table ->
-				generateBasis(localMetaDB, table, projectPath, packageName)
-				generateClass(localMetaDB, table, projectPath, packageName)
+			database.tables.each {String tablename, NinoxTable table ->
+				generateBasis(table, projectPath, packageName)
+				generateClass(table, projectPath, packageName)
 			}
 		} else {
 			System.out.println("unknown database: $databaseName")
@@ -19,30 +19,42 @@ class RepositoryGenerator {
 	}
 	
 	void generateBasis(NinoxTable table, String projectPath, String packageName) {
-		String outputPath = projectPath + "/src/main/java/" + packageName.replace('.', '/') + "/basis/" + table.name + "Basis.groovy"
+		String outputPath = projectPath + "/src/main/java/" + packageName.replace('.', '/') + "/basis/" + table._name + "Basis.groovy"
 		File outputFile = new File(outputPath)
 		outputFile.parentFile.mkdirs()
 		BufferedWriter output = new BufferedWriter(new FileWriter(outputFile))
 		output.writeLine("package ${packageName}.basis")
 		output.newLine()
-		output.writeLine("import de.pch.dataobject.NinoxDataObject")
+		output.writeLine("import de.pch.ninox.NinoxDataObject")
+		output.writeLine("import de.pch.jetstreamdb.JetstreamDatabase")
 		output.newLine()
-		output.writeLine("class ${table.name}Basis extends NinoxDataObject {")
+		output.writeLine("class ${table._name}Basis extends NinoxDataObject {")
+		output.newLine()
+		output.writeLine("\t${table._name}Basis(JetstreamDatabase jetstreamDatabase, long _id) {")
+		output.writeLine("\t\tsuper(jetstreamDatabase, _id)")
+		output.writeLine("\t}")
+		output.newLine()
 		output.writeLine("}")
 		output.close()
 
 	}
 	
 	void generateClass(NinoxTable table, String projectPath, String packageName) {
-		String outputPath = projectPath + "/src/main/java/" + packageName.replace('.', '/') + "/" + table.name + ".groovy"
+		String outputPath = projectPath + "/src/main/java/" + packageName.replace('.', '/') + "/" + table._name + ".groovy"
 		File outputFile = new File(outputPath)
 		outputFile.parentFile.mkdirs()
 		BufferedWriter output = new BufferedWriter(new FileWriter(outputFile))
 		output.writeLine("package $packageName")
 		output.newLine()
-		output.writeLine("import ${packageName}.basis.${table.name}Basis")
+		output.writeLine("import ${packageName}.basis.${table._name}Basis")
+		output.writeLine("import de.pch.jetstreamdb.JetstreamDatabase")
 		output.newLine()
-		output.writeLine("class $table.name extends ${table.name}Basis {")
+		output.writeLine("class $table._name extends ${table._name}Basis {")
+		output.newLine()
+		output.writeLine("\t$table._name(JetstreamDatabase jetstreamDatabase, long _id) {")
+		output.writeLine("\t\tsuper(jetstreamDatabase, _id)")
+		output.writeLine("\t}")
+		output.newLine()
 		output.writeLine("}")
 		output.close()
 

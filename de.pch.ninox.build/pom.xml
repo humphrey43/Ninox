@@ -12,5 +12,6 @@
   	<module>../de.pch.ninox</module>
   	<module>../de.pch.repository</module>
   	<module>../de.pch.rest</module>
+  	<module>../de.pch.dataobject.itrepository</module>
   </modules>
 </project>

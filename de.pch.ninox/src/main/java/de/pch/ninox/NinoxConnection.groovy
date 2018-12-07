@@ -36,6 +36,7 @@ class NinoxConnection {
 	void readMetamodel(String teamName, String databaseName) {
 		
 		JetstreamDatabase metaDatabase = useDatabase(teamName)
+		metaDatabase.startTransaction()
 		
 		// get team (no changes possible, so no oldteam)
 		String path = 'teams'
@@ -44,12 +45,7 @@ class NinoxConnection {
 		jsonData.each {jsonTeam ->
 			if (jsonTeam.name == teamName) {
 				if (team == null) {
-					team = new NinoxTeam()
-					team.name = jsonTeam.name
-					team.id = jsonTeam.id
-					metaDatabase.setObject(NINOX_TEAM, teamName, team)
-					metaDatabase.setDatabaseChanged()
-					team.save(metaDatabase)
+					team = new NinoxTeam(metaDatabase, jsonTeam.name, jsonTeam.id)
 				}
 				return true     // break
 			} 
@@ -58,55 +54,33 @@ class NinoxConnection {
 
 		// read databases
 		if (team != null) {
-			path = path + '/' + team.id + '/databases'
+			path = path + '/' + team._id + '/databases'
 			jsonData = readNinox(path)
 			jsonData.find {jsonDatabase ->
 				if (jsonDatabase.name == databaseName) {
 					NinoxDatabase database = team.databases[databaseName]
 					if (database == null) {
-						database = new NinoxDatabase()
-						database.id = jsonDatabase.id
-						database.name = jsonDatabase.name
-						database.team = team
-						team.databases[database.name] = database
-						metaDatabase.setDatabaseChanged()
-						team.save(metaDatabase)
-						database.save(metaDatabase)
+						database = new NinoxDatabase(metaDatabase, team, jsonDatabase.name, jsonDatabase.id)
 					}
 					
 					// readTables
-					path = path + '/' + database.id + '/tables'
+					path = path + '/' + database._id + '/tables'
 					jsonData = readNinox(path)
 					jsonData.each {jsonTable ->
 						NinoxTable table = database.tablesId[jsonTable.id]
 						if (table == null) {
-							table = new NinoxTable()
-							table.id = jsonTable.id
-							table.name = jsonTable.name
-							table.database = database
-							database.tables[table.name] = table
-							database.tablesId[table.id] = table
+							table = new NinoxTable(metaDatabase, database, jsonTable.name, jsonTable.id)
 						} else {
 						}
-						table.id = jsonTable.id
-						table.name = jsonTable.name
-						table.database = database
-						database.tables[table.name] = table
-						database.tablesId[table.id] = table
-						tables[table.name] = table
 						
 						// readFields
 						jsonTable.fields.each {jsonField -> 
-							NinoxField field = new NinoxField()
-							field.id = jsonField.id
-							field.name = jsonField.name
+							NinoxField field = new NinoxField(metaDatabase, table, jsonField.name, jsonField.id)
 							field.type = jsonField.type
 							if (field.type == 'ref') {
 								field.referencedTableId = jsonField.referenceToTable
 								field.reverseFieldId = jsonField.reverseField
 							}
-							field.table = table
-							table.fields[field.name] = field
 						}
 					}
 					
@@ -116,7 +90,7 @@ class NinoxConnection {
 							if (field.type == 'ref') {
 								NinoxTable refTable = database.tablesId[field.referencedTableId]
 								field.referencedTable = refTable
-								System.out.println tableName + '.' + fieldName + ' -> ' + refTable.name
+								System.out.println tableName + '.' + fieldName + ' -> ' + refTable._name
 							}
 						}
 					}
@@ -127,6 +101,7 @@ class NinoxConnection {
 			}
 			int i = 42
 		}
+		metaDatabase.endTransaction()
 	}
 	
 	void readTableContent(String tableName) {
