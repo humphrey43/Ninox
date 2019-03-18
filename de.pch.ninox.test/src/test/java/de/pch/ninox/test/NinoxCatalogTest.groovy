@@ -15,7 +15,7 @@ public class NinoxCatalogTest {
 	public final static String DBNAME_META = 'ITTeam'
 	public final static String DBNAME_DATA = 'ITRepository'
 	
-//	@Test
+	@Test
 	public void Test1() {
 		
 //		connection.readMetamodel(localMetaDB, 'ITTeam', 'ITRepository')
